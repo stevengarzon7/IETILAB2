@@ -1,10 +1,18 @@
 package edu.eci.ieti.springboot.data;
 
 import edu.eci.ieti.springboot.dto.UserDto;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Date;
+@Document
 public class User {
+    @Id
     private String id;
     private String name;
+
+    @Indexed( unique = true )
     private String email;
     private String lastName;
     private String createdAt;
@@ -65,6 +73,12 @@ public class User {
 
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
+    }
+    public void update(UserDto userDto )
+    {
+        name = userDto.getName();
+        lastName = userDto.getLastName();
+        email = userDto.getEmail();
     }
 
 }
